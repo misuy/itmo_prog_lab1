@@ -74,26 +74,23 @@ public class Lab1
     {
         String s = String.format("%.3f", n);
         int len = s.length();
-        for (int i = 0; i < (maxLen - len); i++)
+        if (maxLen >= len)
         {
-            s += " ";
+            for (int i = 0; i < (maxLen - len); i++)
+            {
+                s += " ";
+            }
+        }
+        else
+        {
+            s = s.substring(0, 7) + ".. ";
         }
         return s;
     }
 
     public static void printArray(float[][] m)
     {
-        int maxLen = -1;
-        for (int i = 0; i < m.length; i++)
-        {
-            for (int j = 0; j < m[i].length; j++)
-            {
-                String s = String.format("%.3f", m[i][j]);
-                int len = s.length();
-                if (len > maxLen) maxLen = len;
-            }
-        }
-        maxLen++;
+        int maxLen = 10;
         String line;
         for (int i = 0; i < m.length; i++)
         {
@@ -119,12 +116,6 @@ public class Lab1
         final int[] CASE2 = {8, 14, 16, 20, 24};
         int[] a1 = fillA1(STARTA1, ENDA1);
         float[] x = fillX(MINX, MAXX, LENX);
-        for (int i=0; i<x.length; i++)
-        {
-            System.out.printf("%.3f", x[i]);
-            System.out.print(" ");
-        }
-        System.out.println();
         float[][] a2 = fillA2(CASE1, CASE2, HEIGHTA2, WEIGHTA2, a1, x);
         printArray(a2);
     }
