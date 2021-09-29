@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Lab1
 {
     public static int[] fillA1(int start, int end)
@@ -70,37 +72,52 @@ public class Lab1
         return m;
     }
 
-    public static String modToString(float n, int maxLen)
+    public static String modToString(float n, int maxLen, int longDigitsCounter)
     {
         String s = String.format("%.3f", n);
         int len = s.length();
-        if (maxLen >= len)
+        if (maxLen > len)
         {
             for (int i = 0; i < (maxLen - len); i++)
             {
                 s += " ";
             }
         }
-        else
-        {
-            s = s.substring(0, 7) + ".. ";
-        }
+        else s = "(" + Integer.toString(longDigitsCounter + 1) + ")       ";
         return s;
     }
+
+    public static String isLongDigit(float n, int maxLen, int longDigitsCounter)
+    {
+        String s = String.format("%.3f", n);
+        if (maxLen <= s.length())
+        {
+            return "(" + Integer.toString(longDigitsCounter + 1) + ") - " + s + "\n";
+        }
+        else return "";
+    }
+
 
     public static void printArray(float[][] m)
     {
         int maxLen = 10;
-        String line;
+        String ss = "";
+        String line = "";
+        String longDigitsLine = "";
+        int longDigitsCounter = 0;
         for (int i = 0; i < m.length; i++)
         {
             line = "";
             for (int j = 0; j < m[i].length; j++)
             {
-                line += modToString(m[i][j], maxLen);
+                line += modToString(m[i][j], maxLen, longDigitsCounter);
+                ss = isLongDigit(m[i][j], maxLen, longDigitsCounter);
+                longDigitsLine += ss;
+                if (ss != "") longDigitsCounter++;
             }
             System.out.println(line);
         }
+        System.out.println(longDigitsLine);
     }
 
     public static void main(String[] args)
